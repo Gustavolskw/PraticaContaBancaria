@@ -1,6 +1,6 @@
 package Model;
 
-public class Movimentacao {
+public class Movimentacao implements IMovimentao{
 	 private String tipo; // (considerar: 1- saque e 2- depósito)
 	 private int  valor;
 	 private String data;
