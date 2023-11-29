@@ -1,6 +1,6 @@
 package Model;
 
-public class PJ {
+public class PJ extends Usuario{
 	 protected String cnpj;
 	 
 	 public String getCnpj() {

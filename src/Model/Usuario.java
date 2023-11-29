@@ -1,16 +1,16 @@
 package Model;
 
-public class Usuario implements IUsuario{
-	 protected String nome;
+public abstract class Usuario implements IUsuario{
+	 protected String operador;
 	 protected String endereco;
 	 
 	 
-	 public String getNome() {
-		  return nome;
+	 public String getOperador() {
+		  return operador;
 	 }
 	 
-	 public void setNome(String nome) {
-		  this.nome = nome;
+	 public void setOperador(String nome) {
+		  this.operador = nome;
 	 }
 	 
 	 public String getEndereco() {

@@ -1,6 +1,6 @@
 package Model;
 
-public class PF {
+public class PF extends Usuario{
 	 protected String cpf;
 	 
 	 public String getCpf() {

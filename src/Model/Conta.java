@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class Conta {
 	 private String  titularDaConta;
 	 private String  tipo ; // (1-conta poupança, 2-conta corrente.)
+	private String tipoDeUsuario;
 	private int saldo;
 	 private ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
 	 private ArrayList<Movimentacao> listaDeDsepositos = new ArrayList<Movimentacao>();
 	 private ArrayList<Movimentacao> listaDeSaques = new ArrayList<Movimentacao>();
-	 private ArrayList<Movimentacao> listaDeUsuarios = new ArrayList<Movimentacao>();
+	 private ArrayList<Usuario> listaDeUsuarios = new ArrayList<Usuario>();
 	 
 	 
 	 public int depositar(){
@@ -34,8 +35,16 @@ public  void gerarExtratoDepositos(){
 public void  gerarExtratoSaques(){
 
 }
-	 
-	 public String getTitularDaConta() {
+
+	public String getTipoDeUsuario() {
+		return tipoDeUsuario;
+	}
+
+	public void setTipoDeUsuario(String tipoDeUsuario) {
+		this.tipoDeUsuario = tipoDeUsuario;
+	}
+
+	public String getTitularDaConta() {
 		  return titularDaConta;
 	 }
 	 
@@ -83,11 +92,11 @@ public void  gerarExtratoSaques(){
 		  this.listaDeSaques = listaDeSaques;
 	 }
 	 
-	 public ArrayList<Movimentacao> getListaDeUsuarios() {
+	 public ArrayList<Usuario> getListaDeUsuarios() {
 		  return listaDeUsuarios;
 	 }
-	 
-	 public void setListaDeUsuarios(ArrayList<Movimentacao> listaDeUsuarios) {
+
+	 public void setListaDeUsuarios(ArrayList<Usuario> listaDeUsuarios) {
 		  this.listaDeUsuarios = listaDeUsuarios;
 	 }
 }
