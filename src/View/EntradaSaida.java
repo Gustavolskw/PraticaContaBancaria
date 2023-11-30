@@ -9,7 +9,7 @@ public class EntradaSaida {
 	 public static int solicitarInformacoesSaque(){
 		return 0;
 	 }
-	 public static void exibirSaldo(){
+	 public static void exibirSaldo(int saldoAtual){
 		
 	 }
 	public static void exibirDadosDaConta() {
@@ -34,8 +34,8 @@ public static void exibirExtratoDeDepositos(){
 		   return "Sacar";
 	  }
  }
- public static int solicitaValorDeMovimentacao(String tipo){
-		 return Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o valor a ser movimentado.", tipo, JOptionPane.PLAIN_MESSAGE ));
+ public static int solicitaValorDeMovimentacao(String tipo, String opcao){
+		 return Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o valor a ser "+ opcao, tipo, JOptionPane.PLAIN_MESSAGE ));
  }
 
  public static int escolha(){
@@ -53,7 +53,7 @@ public static void exibirExtratoDeDepositos(){
 	return JOptionPane.showInputDialog(null, "escreva o nome do "+opcao+" da conta", "Banco da Somália", JOptionPane.PLAIN_MESSAGE);
  }
 	public static String solicitacaoAoUsuario(String dado, String tipo){
-		return JOptionPane.showInputDialog(null, "Digite o seu "+dado, tipo, JOptionPane.INFORMATION_MESSAGE);
+		return JOptionPane.showInputDialog(null, "Digite o seu "+dado , tipo, JOptionPane.INFORMATION_MESSAGE);
 	}
 	public static int login(){
 		 return Integer.parseInt(JOptionPane.showInputDialog(null, "Digite seu Passe de Login para entrar "));
@@ -76,7 +76,5 @@ public static void exibirExtratoDeDepositos(){
 	 public static void mensagemGeral(String mensagem){
 		  JOptionPane.showMessageDialog(null, mensagem, "Banco da Somália", -1);
 	 }
-	 
-
 
 }
