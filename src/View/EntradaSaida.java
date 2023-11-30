@@ -37,15 +37,7 @@ public static void exibirExtratoDeDepositos(){
  public static int solicitaValorDeMovimentacao(String tipo){
 		 return Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o valor a ser movimentado.", tipo, JOptionPane.PLAIN_MESSAGE ));
  }
- public static String escolhaTipoDeUsuario(){
-	 String[] opcoes= {"Pessoa Fisica", "Pessoa Juridica"};
-	 int escolha  =  JOptionPane.showOptionDialog(null, "Selecione o tipo de conta que dseja abrir", "Banco da Somalia", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-	 if(escolha== 0 ){
-		 return "Pessoa Fisica";
-	 }else {
-		 return "Pessoa Juridica";
-	 }
- }
+
  public static int escolha(){
 	 String[] opcoes = {"Opcoes de Movimentação", "Detalhes do Extrato", "Sair"};
 	 JComboBox<String> menu = new JComboBox<>(opcoes);
@@ -54,18 +46,33 @@ public static void exibirExtratoDeDepositos(){
 
  }
 	public static int escolhaEntrada(){
-		String[] opcoes = {"CriarConta", "Entrar Em conta", "Sair"};
-		JComboBox<String> menu = new JComboBox<>(opcoes);
-		JOptionPane.showConfirmDialog(null, menu, "Selecione a opcao que deseja executar.", JOptionPane.DEFAULT_OPTION);
-		return menu.getSelectedIndex();
-
+		String[] opcoes = {"Entrar Em conta", "Sair"};
+		return JOptionPane.showOptionDialog(null,"Selecione a opcao que deseja executar", "B.S.", JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
 	}
  public static String solicitaNome(String opcao){
 	return JOptionPane.showInputDialog(null, "escreva o nome do "+opcao+" da conta", "Banco da Somália", JOptionPane.PLAIN_MESSAGE);
  }
 	public static String solicitacaoAoUsuario(String dado, String tipo){
-		return JOptionPane.showInputDialog(null, "Digite seu "+dado, tipo, JOptionPane.INFORMATION_MESSAGE);
+		return JOptionPane.showInputDialog(null, "Digite o seu "+dado, tipo, JOptionPane.INFORMATION_MESSAGE);
 	}
+	public static int login(){
+		 return Integer.parseInt(JOptionPane.showInputDialog(null, "Digite seu Passe de Login para entrar "));
+	}
+	 public static void msgEncerraPrograma(){
+		  JOptionPane.showMessageDialog(null, "O programa será encerrado");
+	 }
+	 public static int passeDeLogin(){
+		  return Integer.parseInt(JOptionPane.showInputDialog(null, "Digite Seu passe de Login"));
+	 }
+	 public static String solicitaTipoDeConta(){
+		  String[] opcoes = {"Corrente", "Poupança"};
+		  int escolha = JOptionPane.showOptionDialog(null, "Escolha o tipo de conta que deseja abrir", "B.S", JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
+		  if(escolha==0){
+			   return "Corrente";
+		  }else {
+			   return "Poupança";
+		  }
+	 }
 
 
 }

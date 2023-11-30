@@ -5,46 +5,36 @@ import java.util.ArrayList;
 public class Conta {
 	 private String  titularDaConta;
 	 private String  tipo ; // (1-conta poupança, 2-conta corrente.)
-	private String tipoDeUsuario;
-	private int saldo;
+	 private int saldo;
 	 private ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
 	 private ArrayList<Movimentacao> listaDeDsepositos = new ArrayList<Movimentacao>();
 	 private ArrayList<Movimentacao> listaDeSaques = new ArrayList<Movimentacao>();
-	 private ArrayList<Usuario> listaDeUsuarios = new ArrayList<Usuario>();
 	 
 	 
 	 public int depositar(){
-		return 0;
+		  return 0;
 	 }
-public int   sacar(){
-return 0;
-}
-
-public int  gerarSaldo(){
-return 0;
-}
-public String  gerarDadosDaConta(){
-return "";
-}
-public void gerarExtrato(){
-
-}
-public  void gerarExtratoDepositos(){
-
-}
-public void  gerarExtratoSaques(){
-
-}
-
-	public String getTipoDeUsuario() {
-		return tipoDeUsuario;
-	}
-
-	public void setTipoDeUsuario(String tipoDeUsuario) {
-		this.tipoDeUsuario = tipoDeUsuario;
-	}
-
-	public String getTitularDaConta() {
+	 public int   sacar(){
+		  return 0;
+	 }
+	 
+	 public int  gerarSaldo(){
+		  return 0;
+	 }
+	 public String  gerarDadosDaConta(){
+		  return "";
+	 }
+	 public void gerarExtrato(){
+		
+	 }
+	 public  void gerarExtratoDepositos(){
+		
+	 }
+	 public void  gerarExtratoSaques(){
+		
+	 }
+	 
+	 public String getTitularDaConta() {
 		  return titularDaConta;
 	 }
 	 
@@ -92,11 +82,4 @@ public void  gerarExtratoSaques(){
 		  this.listaDeSaques = listaDeSaques;
 	 }
 	 
-	 public ArrayList<Usuario> getListaDeUsuarios() {
-		  return listaDeUsuarios;
-	 }
-
-	 public void setListaDeUsuarios(ArrayList<Usuario> listaDeUsuarios) {
-		  this.listaDeUsuarios = listaDeUsuarios;
-	 }
 }
