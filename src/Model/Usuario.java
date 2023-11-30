@@ -1,11 +1,13 @@
 package Model;
 
+import View.EntradaSaida;
+
 public class Usuario implements IUsuario{
 	 protected String nome;
 	 protected String endereco;
-	protected String cpf;
-	protected int ping;
-		
+	 protected String cpf;
+	 protected int pin;
+	 
 	 public String getEndereco() {
 		  return endereco;
 	 }
@@ -31,10 +33,17 @@ public class Usuario implements IUsuario{
 	 }
 	 
 	 public int getPing() {
-		  return ping;
+		  return pin;
 	 }
 	 
-	 public void setPing(int ping) {
-		  this.ping = ping;
+	 public void setPin(int pin) {
+		  this.pin = pin;
+	 }
+	 public void cadastro(){
+		  setNome(EntradaSaida.solicitaNome("Titular"));
+		  setCpf(EntradaSaida.solicitacaoAoUsuario("CPF", "Documento"));
+		  setEndereco(EntradaSaida.solicitacaoAoUsuario("Endereço", "Endereço"));
+		  setPin(EntradaSaida.passeDeLogin());
+		  
 	 }
 }

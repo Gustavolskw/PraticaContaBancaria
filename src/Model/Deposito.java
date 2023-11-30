@@ -3,9 +3,9 @@ package Model;
 import View.EntradaSaida;
 
 public class Deposito extends Movimentacao{
-    public int movimentacaoDeSaldo(){
+    public void movimentacaoDeSaldo(){
         setValor(EntradaSaida.solicitaValorDeMovimentacao("Saque"));
-        Conta saldoAtual = new Conta();
-        return getValor() + saldoAtual.getSaldo();
+        Conta saldo = new Conta();
+        saldo.setSaldo(getValor() + saldo.getSaldo());
     }
 }

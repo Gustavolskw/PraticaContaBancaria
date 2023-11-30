@@ -73,6 +73,10 @@ public static void exibirExtratoDeDepositos(){
 			   return "Poupança";
 		  }
 	 }
+	 public static void mensagemGeral(String mensagem){
+		  JOptionPane.showMessageDialog(null, mensagem, "Banco da Somália", -1);
+	 }
+	 
 
 
 }
