@@ -9,6 +9,8 @@ public class Conta {
 	 private String  tipo ; // (1-conta poupança, 2-conta corrente.)
 	 private int saldo;
 	 private ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	private  ArrayList<Cofre> listaCorrente = new ArrayList<Cofre>();
+	 private ArrayList<Cofre> listaPoupanca = new ArrayList<Cofre>();
 	 private ArrayList<Movimentacao> listaDeDsepositos = new ArrayList<Movimentacao>();
 	 private ArrayList<Movimentacao> listaDeSaques = new ArrayList<Movimentacao>();
 	 
@@ -29,12 +31,15 @@ public class Conta {
 	 public void gerarExtrato(){
 		
 	 }
-	 public  void gerarExtratoDepositos(){
+	 public  void gerarExtratoDepositos(ArrayList<Movimentacao> listaDeDsepositos){
+		  setListaDeDsepositos(listaDeDsepositos);
 		
 	 }
 	 public void  gerarExtratoSaques(){
 		
 	 }
+	 //setters e getters variaveis
+	 
 	 
 	 public String getTitularDaConta() {
 		  return titularDaConta;
@@ -59,6 +64,8 @@ public class Conta {
 	 public void setSaldo(int saldo) {
 		  this.saldo = saldo;
 	 }
+	 //setters e getters de listas
+	 
 	 
 	 public ArrayList<Movimentacao> getListaDeMovimentacao() {
 		  return listaDeMovimentacao;
@@ -66,6 +73,22 @@ public class Conta {
 	 
 	 public void setListaDeMovimentacao(ArrayList<Movimentacao> listaDeMovimentacao) {
 		  this.listaDeMovimentacao = listaDeMovimentacao;
+	 }
+	 
+	 public ArrayList<Cofre> getListaCorrente() {
+		  return listaCorrente;
+	 }
+	 
+	 public void setListaCorrente(ArrayList<Cofre> listaCorrente) {
+		  this.listaCorrente = listaCorrente;
+	 }
+	 
+	 public ArrayList<Cofre> getListaPoupanca() {
+		  return listaPoupanca;
+	 }
+	 
+	 public void setListaPoupanca(ArrayList<Cofre> listaPoupanca) {
+		  this.listaPoupanca = listaPoupanca;
 	 }
 	 
 	 public ArrayList<Movimentacao> getListaDeDsepositos() {
@@ -83,5 +106,4 @@ public class Conta {
 	 public void setListaDeSaques(ArrayList<Movimentacao> listaDeSaques) {
 		  this.listaDeSaques = listaDeSaques;
 	 }
-	 
 }
