@@ -3,26 +3,30 @@ package Control;
 import Model.*;
 import View.EntradaSaida;
 import java.util.ArrayList;
-
-
 public class 	Controller {
 	 Conta conta = null;
 	 Movimentacao movimentacao = null;
 	 public void exibeMenu() {
 		  Usuario usuario = new Usuario();
 		  this.conta = new Conta();
+		 var poupanca1 = new Poupanca();
+		 var corrente1 = new Corrente();
 		  this.movimentacao = new Movimentacao();
 		  var deposito1 = new Deposito();
-		  
 		  boolean saldoBaixo = false;
 		  int escolha;
 		  ArrayList<Movimentacao> listaDeMoviemntacao = new ArrayList<Movimentacao>();
 		  ArrayList<Cofre> listaCorrente = new ArrayList<Cofre>();
 		  ArrayList<Cofre> listaPoupanca = new ArrayList<Cofre>();
-		  
+		 ArrayList<Conta> tiposDeConta = new ArrayList<Conta>();
+		 ArrayList<Movimentacao> correnteTipoTrans = new ArrayList<Movimentacao>();
+		 ArrayList<Movimentacao> poupancaTipoTrans = new ArrayList<Movimentacao>();
+
 		  //Cadastrar usuario
 		  EntradaSaida.mensagemGeral("Bem Vindo ao Banco da Somália\nCrie uma Nova Conta");
 		  usuario.cadastro();
+
+		  //entrada na conta
 		  escolha = EntradaSaida.escolhaEntrada();
 		  if(escolha==0) {
 			   System.out.println(usuario.getPing());
@@ -32,40 +36,60 @@ public class 	Controller {
 					EntradaSaida.mensagemGeral("Senha Incorreta!!!");
 					passe = EntradaSaida.login();
 			   }
+
+			   //Priemeiro deposito
 			   EntradaSaida.mensagemGeral("Para inicar você precisa depositar uma valor a conta...");
-			   this.conta.setTipo(EntradaSaida.solicitaTipoDeConta());
+			  this.conta.setTipo(EntradaSaida.solicitaTipoDeConta());
+			   tiposDeConta.add(this.conta);
+			   this.movimentacao.setTipo("Depositar");
 			   if(this.conta.getTipo().equalsIgnoreCase("Corrente")) {
-					var corrente = new Corrente();
+				   correnteTipoTrans.add(this.movimentacao);
 					deposito1.setValor(EntradaSaida.solicitarInformacoesDeposito());
 					listaDeMoviemntacao.add(deposito1);
-					corrente.setSaldoConta(deposito1.getValor());
-					listaCorrente.add(corrente);
+					corrente1.setTransferConta(deposito1.getValor());
+					listaCorrente.add(corrente1);
+
 					
 			   }else {
-					var poupanca = new Poupanca();
+				  poupancaTipoTrans.add(this.movimentacao);
 					deposito1.setValor(EntradaSaida.solicitarInformacoesDeposito());
 					listaDeMoviemntacao.add(deposito1);
-					poupanca.setSaldoConta(deposito1.getValor());
-					listaPoupanca.add(poupanca);
+					poupanca1.setTransferConta(deposito1.getValor());
+					listaPoupanca.add(poupanca1);
+
 			   }
 			   this.conta.depositar(deposito1.getValor());
+
+			   //Operacoes dentro da conta
 			   do {
 					escolha = EntradaSaida.escolha();
 					switch (escolha) {
 						 case 0:
-							  this.conta.setTipo(EntradaSaida.solicitaTipoDeConta());
-							  if(this.conta.getTipo().equalsIgnoreCase("Corrente")){
-								   this.movimentacao.setTipo(EntradaSaida.solicitaOpcaoDeMovimentacao());
+							 Movimentacao tipoDeTransacao = new Movimentacao();
+							 //Opcao de movimentar Conta (Sacar) (Depositar)
+							 var tipoConta = new Conta();
+							  tipoConta.setTipo(EntradaSaida.solicitaTipoDeConta());
+							  tiposDeConta.add(tipoConta);
+							  if(tipoConta.getTipo().equalsIgnoreCase("Corrente")){
+								  //Conta corrente
+								  var corrente = new Corrente();
+								  tipoDeTransacao.setTipo(EntradaSaida.solicitaOpcaoDeMovimentacao());
 								   if(this.conta.getSaldo()<10){
 										saldoBaixo = true;
 								   }
-								   if (this.movimentacao.getTipo().equalsIgnoreCase("Depositar")) {
+								   if (tipoDeTransacao.getTipo().equalsIgnoreCase("Depositar")) {
+									   correnteTipoTrans.add(tipoDeTransacao);
 										var deposito = new Deposito();
 										deposito.setValor(EntradaSaida.solicitarInformacoesDeposito());
 										listaDeMoviemntacao.add(deposito);
-										this.conta.depositar(deposito.getValor());
+										corrente.setTransferConta(deposito.getValor());
+										listaCorrente.add(corrente);
+
+										this.conta.depositar( deposito.getValor());
+
 								   }else {
-										if(!saldoBaixo){
+									   correnteTipoTrans.add(tipoDeTransacao);
+								   if(!saldoBaixo){
 											 var saque = new Saque();
 											 saque.setValor(EntradaSaida.solicitarInformacoesSaque());
 											 while(saque.getValor()>this.conta.getSaldo()){
@@ -73,22 +97,33 @@ public class 	Controller {
 												  saque.setValor(EntradaSaida.solicitarInformacoesSaque());
 											 }
 											 listaDeMoviemntacao.add(saque);
+											 corrente.setTransferConta(saque.getValor());
+											 listaCorrente.add(corrente);
 											 this.conta.sacar(saque.getValor());
+
 										}else{
 											 EntradaSaida.mensagemGeral("Seu Saldo é Baixo para realizar um Saque");
 										}
 								   }
 							  }else {
-								   this.movimentacao.setTipo(EntradaSaida.solicitaOpcaoDeMovimentacao());
+								  //conta poupança
+								  var poupanca = new Poupanca();
+								  tipoDeTransacao.setTipo(EntradaSaida.solicitaOpcaoDeMovimentacao());
 								   if (this.conta.getSaldo() < 10) {
 										saldoBaixo = true;
 								   }
-								   if (this.movimentacao.getTipo().equalsIgnoreCase("Depositar")) {
+								   if (tipoDeTransacao.getTipo().equalsIgnoreCase("Depositar")) {
+									   poupancaTipoTrans.add(tipoDeTransacao);
+
 										var deposito = new Deposito();
 										deposito.setValor(EntradaSaida.solicitarInformacoesDeposito());
 										listaDeMoviemntacao.add(deposito);
-										this.conta.depositar(deposito.getValor());
+									   poupanca.setTransferConta(deposito.getValor());
+									   listaPoupanca.add(poupanca);
+									   this.conta.depositar(deposito.getValor());
+
 								   } else {
+									   poupancaTipoTrans.add(tipoDeTransacao);
 										if (!saldoBaixo) {
 											 var saque = new Saque();
 											 saque.setValor(EntradaSaida.solicitarInformacoesSaque());
@@ -96,8 +131,11 @@ public class 	Controller {
 												  EntradaSaida.mensagemGeral("O valor Digitado é acima do Saldo atual!!!");
 												  saque.setValor(EntradaSaida.solicitarInformacoesSaque());
 											 }
-											 listaDeMoviemntacao.add(saque);
-											 this.conta.sacar(saque.getValor());
+											listaDeMoviemntacao.add(saque);
+											 poupanca.setTransferConta(saque.getValor());
+											 listaPoupanca.add(poupanca);
+											this.conta.sacar( saque.getValor());
+
 										} else {
 											 EntradaSaida.mensagemGeral("Seu Saldo é Baixo para realizar um Saque");
 										}
@@ -105,11 +143,23 @@ public class 	Controller {
 							  }
 							  break;
 						 case 1:
-							  EntradaSaida.mensagemGeral("Opcoes de Visualizaçao do extrato");
-							  for (int i = 0; i < listaDeMoviemntacao.size(); i++) {
-								   System.out.println("Movimentação " + (i + 1) + " - " + listaDeMoviemntacao.get(i).toString());
-							  }
-							  
+							 for (int i = 0; i < listaDeMoviemntacao.size(); i++) {
+								EntradaSaida.exibirExtratoDeDepositos(listaDeMoviemntacao, tiposDeConta, i);
+							 }
+							 System.out.println("###########################################################");
+							 System.out.println("<<POUPANÇA>>");
+								 for(int i = 0; i<listaPoupanca.size(); i++){
+
+									 EntradaSaida.exibirExtratoPopCorr(poupancaTipoTrans, listaPoupanca,"Poupança",  i);
+
+								 }
+							 System.out.println("###########################################################");
+							 System.out.println("<<CORRENTE>>");
+								 for(int i = 0; i<listaCorrente.size(); i++){
+
+							 EntradaSaida.exibirExtratoPopCorr(correnteTipoTrans, listaPoupanca,"Corrente",  i);
+						 }
+
 							  break;
 					}
 			   } while (escolha != 2);

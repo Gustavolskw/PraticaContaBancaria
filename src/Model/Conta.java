@@ -9,17 +9,19 @@ public class Conta {
 	 private String  tipo ; // (1-conta poupança, 2-conta corrente.)
 	 private int saldo;
 	 private ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	 private ArrayList<Conta> tiposDeConta = new ArrayList<Conta>();
 	private  ArrayList<Cofre> listaCorrente = new ArrayList<Cofre>();
 	 private ArrayList<Cofre> listaPoupanca = new ArrayList<Cofre>();
 	 private ArrayList<Movimentacao> listaDeDsepositos = new ArrayList<Movimentacao>();
 	 private ArrayList<Movimentacao> listaDeSaques = new ArrayList<Movimentacao>();
+	 private ArrayList<Movimentacao> correnteTipoTrans = new ArrayList<Movimentacao>();
+	 private ArrayList<Movimentacao> poupancaTipoTrans = new ArrayList<Movimentacao>();
 	 
-	 
-	 public int depositar(int  valor ){
-		  return  this.saldo += valor;
+	 public int depositar( int  valor ){
+		  return  this.saldo+= valor;
 	 }
-	 public int sacar(int valor ){
-		  return  this.saldo -= valor;
+	 public int sacar( int valor ){
+		  return   this.saldo -= valor;
 	 }
 	 
 	 public int  gerarSaldo(){
@@ -106,4 +108,28 @@ public class Conta {
 	 public void setListaDeSaques(ArrayList<Movimentacao> listaDeSaques) {
 		  this.listaDeSaques = listaDeSaques;
 	 }
+
+	public ArrayList<Conta> getTiposDeConta() {
+		return tiposDeConta;
+	}
+
+	public void setTiposDeConta(ArrayList<Conta> tiposDeConta) {
+		this.tiposDeConta = tiposDeConta;
+	}
+
+	public ArrayList<Movimentacao> getCorrenteTipoTrans() {
+		return correnteTipoTrans;
+	}
+
+	public void setCorrenteTipoTrans(ArrayList<Movimentacao> correnteTipoTrans) {
+		this.correnteTipoTrans = correnteTipoTrans;
+	}
+
+	public ArrayList<Movimentacao> getPoupancaTipoTrans() {
+		return poupancaTipoTrans;
+	}
+
+	public void setPoupancaTipoTrans(ArrayList<Movimentacao> poupancaTipoTrans) {
+		this.poupancaTipoTrans = poupancaTipoTrans;
+	}
 }

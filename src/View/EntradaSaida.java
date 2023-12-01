@@ -1,6 +1,11 @@
 package View;
 
+import Model.Cofre;
+import Model.Conta;
+import Model.Movimentacao;
+
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class EntradaSaida {
 	 public static int solicitarInformacoesDeposito(){
@@ -19,11 +24,11 @@ public class EntradaSaida {
 	 public static void exibirExtratoCompleto(){
 		
 	 }
-	 public static void exibirExtratoDeDepositos(){
-		
+	 public static void exibirExtratoDeDepositos(ArrayList<Movimentacao> lista, ArrayList<Conta> tipoDeConta, int valor ) {
+		 System.out.println("Movimentação " + (valor + 1)+  " - " + tipoDeConta.get(valor).getTipo()+ " : " +lista.get(valor).getValor());
 	 }
-	 public static void exibirExtratoDeSaques(){
-		
+	 public static void exibirExtratoDeSaques(String tipoDeConta, int valor ) {
+		 System.out.println("Saque - "+tipoDeConta+ valor);
 	 }
 	 public static String solicitaOpcaoDeMovimentacao(){
 		  String[] opcoes= {"Depositar", "Sacar"};
@@ -72,5 +77,8 @@ public class EntradaSaida {
 	 public static void mensagemGeral(String mensagem){
 		  JOptionPane.showMessageDialog(null, mensagem, "Banco da Somália", JOptionPane.INFORMATION_MESSAGE);
 	 }
+	public static void exibirExtratoPopCorr(ArrayList<Movimentacao>tipoDeTransacao, ArrayList<Cofre> lista,String tipoDeConta,  int valor ) {
+		System.out.println(tipoDeTransacao.get(valor).getTipo() +  " -  "+tipoDeConta +  " : " +lista.get(valor).getTransferConta());
+	}
 	 
 }
