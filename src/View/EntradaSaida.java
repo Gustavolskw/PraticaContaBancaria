@@ -47,7 +47,7 @@ public static void exibirExtratoDeDepositos(){
  }
 	public static int escolhaEntrada(){
 		String[] opcoes = {"Entrar Em conta", "Sair"};
-		return JOptionPane.showOptionDialog(null,"Selecione a opcao que deseja executar", "B.S.", JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[1]);
+		return JOptionPane.showOptionDialog(null,"Selecione a opcao que deseja executar", "B.S.", JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 	}
  public static String solicitaNome(String opcao){
 	return JOptionPane.showInputDialog(null, "escreva o nome do "+opcao+" da conta", "Banco da Somália", JOptionPane.PLAIN_MESSAGE);
@@ -74,7 +74,7 @@ public static void exibirExtratoDeDepositos(){
 		  }
 	 }
 	 public static void mensagemGeral(String mensagem){
-		  JOptionPane.showMessageDialog(null, mensagem, "Banco da Somália", -1);
+		  JOptionPane.showMessageDialog(null, mensagem, "Banco da Somália", JOptionPane.INFORMATION_MESSAGE);
 	 }
 
 }

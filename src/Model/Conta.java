@@ -1,5 +1,7 @@
 package Model;
 
+import View.EntradaSaida;
+
 import java.util.ArrayList;
 
 public class Conta {
@@ -11,11 +13,11 @@ public class Conta {
 	 private ArrayList<Movimentacao> listaDeSaques = new ArrayList<Movimentacao>();
 	 
 	 
-	 public int depositar(){
-		  return 0;
+	 public int depositar(int  valor ){
+		  return  this.saldo += valor;
 	 }
-	 public int   sacar(){
-		  return 0;
+	 public int sacar(int valor ){
+		  return  this.saldo -= valor;
 	 }
 	 
 	 public int  gerarSaldo(){

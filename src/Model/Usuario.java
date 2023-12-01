@@ -44,6 +44,9 @@ public class Usuario implements IUsuario{
 		  setCpf(EntradaSaida.solicitacaoAoUsuario("CPF", "Documento"));
 		  setEndereco(EntradaSaida.solicitacaoAoUsuario("Endereço", "Endereço"));
 		  setPin(EntradaSaida.passeDeLogin());
+		  Conta conta = new Conta();
+		  conta.setTitularDaConta(getNome());
+		  
 		  
 	 }
 }
