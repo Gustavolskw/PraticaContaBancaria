@@ -15,12 +15,16 @@ public class 	Controller {
 		var deposito1 = new Deposito();
 		boolean saldoBaixo = false;
 		int escolha;
-		ArrayList<Movimentacao> listaDeMoviemntacao = new ArrayList<Movimentacao>();
+		ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
 		ArrayList<Cofre> listaCorrente = new ArrayList<Cofre>();
 		ArrayList<Cofre> listaPoupanca = new ArrayList<Cofre>();
 		ArrayList<Conta> tiposDeConta = new ArrayList<Conta>();
 		ArrayList<Movimentacao> correnteTipoTrans = new ArrayList<Movimentacao>();
 		ArrayList<Movimentacao> poupancaTipoTrans = new ArrayList<Movimentacao>();
+		ArrayList<Movimentacao> listaDeDepositos = new ArrayList<Movimentacao>();
+		ArrayList<Movimentacao> listaDeSaques = new ArrayList<Movimentacao>();
+		ArrayList<Movimentacao> tipoDeTransacaoGeral = new ArrayList<Movimentacao>();
+		ArrayList<Movimentacao> dataDeMovimentacao = new ArrayList<Movimentacao>();
 
 		//Cadastrar usuario
 		EntradaSaida.mensagemGeral("Bem Vindo ao Banco da Somália\nCrie uma Nova Conta");
@@ -39,16 +43,19 @@ public class 	Controller {
 
 			//Priemeiro deposito
 			EntradaSaida.mensagemGeral("Para inicar você precisa depositar uma valor a conta...");
+			this.movimentacao.setData(EntradaSaida.solicitaData());
+			dataDeMovimentacao.add(this.movimentacao);
 			this.conta.setTipo(EntradaSaida.solicitaTipoDeConta());
-
 			tiposDeConta.add(this.conta);
 
 			if(this.conta.getTipo().equalsIgnoreCase("Corrente")) {
 				Movimentacao corenteTipoTrans1 = new Movimentacao();
-				corenteTipoTrans1.setTipo("Deposito");
+				corenteTipoTrans1.setTipo("Depositar");
 				correnteTipoTrans.add(corenteTipoTrans1);
+				tipoDeTransacaoGeral.add(corenteTipoTrans1);
 				deposito1.setValor(EntradaSaida.solicitarInformacoesDeposito());
-				listaDeMoviemntacao.add(deposito1);
+				listaDeMovimentacao.add(deposito1);
+				listaDeDepositos.add(deposito1);
 				corrente1.setTransferConta(deposito1.getValor());
 				listaCorrente.add(corrente1);
 
@@ -57,8 +64,10 @@ public class 	Controller {
 				Movimentacao PoupancaTipoTrans1 = new Movimentacao();
 				PoupancaTipoTrans1.setTipo("Deposito");
 				poupancaTipoTrans.add(PoupancaTipoTrans1);
+				tipoDeTransacaoGeral.add(PoupancaTipoTrans1);
 				deposito1.setValor(EntradaSaida.solicitarInformacoesDeposito());
-				listaDeMoviemntacao.add(deposito1);
+				listaDeMovimentacao.add(deposito1);
+				listaDeDepositos.add(deposito1);
 				poupanca1.setTransferConta(deposito1.getValor());
 				listaPoupanca.add(poupanca1);
 
@@ -72,6 +81,9 @@ public class 	Controller {
 					case 0:
 						//Opcao de movimentar Conta (Sacar) (Depositar)
 						var tipoConta = new Conta();
+						var dataTransacao = new Movimentacao();
+						dataTransacao.setData(EntradaSaida.solicitaData());
+						dataDeMovimentacao.add(dataTransacao);
 						tipoConta.setTipo(EntradaSaida.solicitaTipoDeConta());
 						tiposDeConta.add(tipoConta);
 						if(tipoConta.getTipo().equalsIgnoreCase("Corrente")){
@@ -80,6 +92,7 @@ public class 	Controller {
 							Movimentacao transacaoCorrente = new Movimentacao();
 							transacaoCorrente.setTipo(EntradaSaida.solicitaOpcaoDeMovimentacao());
 							correnteTipoTrans.add(transacaoCorrente);
+							tipoDeTransacaoGeral.add(transacaoCorrente);
 							if(this.conta.getSaldo()<10){
 								saldoBaixo = true;
 							}
@@ -87,7 +100,8 @@ public class 	Controller {
 
 								var deposito = new Deposito();
 								deposito.setValor(EntradaSaida.solicitarInformacoesDeposito());
-								listaDeMoviemntacao.add(deposito);
+								listaDeMovimentacao.add(deposito);
+								listaDeDepositos.add(deposito);
 								corrente.setTransferConta(deposito.getValor());
 								listaCorrente.add(corrente);
 
@@ -101,7 +115,8 @@ public class 	Controller {
 										EntradaSaida.mensagemGeral("O valor Digitado é acima do Saldo atual!!!");
 										saque.setValor(EntradaSaida.solicitarInformacoesSaque());
 									}
-									listaDeMoviemntacao.add(saque);
+									listaDeMovimentacao.add(saque);
+									listaDeSaques.add(saque);
 									corrente.setTransferConta(saque.getValor());
 									listaCorrente.add(corrente);
 									this.conta.sacar(saque.getValor());
@@ -116,6 +131,7 @@ public class 	Controller {
 							Movimentacao transacaoPoupanca = new Movimentacao();
 							transacaoPoupanca.setTipo(EntradaSaida.solicitaOpcaoDeMovimentacao());
 							poupancaTipoTrans.add(transacaoPoupanca );
+							tipoDeTransacaoGeral.add(transacaoPoupanca);
 							if (this.conta.getSaldo() < 10) {
 								saldoBaixo = true;
 							}
@@ -124,7 +140,8 @@ public class 	Controller {
 
 								var deposito = new Deposito();
 								deposito.setValor(EntradaSaida.solicitarInformacoesDeposito());
-								listaDeMoviemntacao.add(deposito);
+								listaDeMovimentacao.add(deposito);
+								listaDeDepositos.add(deposito);
 								poupanca.setTransferConta(deposito.getValor());
 								listaPoupanca.add(poupanca);
 								this.conta.depositar(deposito.getValor());
@@ -138,7 +155,8 @@ public class 	Controller {
 										EntradaSaida.mensagemGeral("O valor Digitado é acima do Saldo atual!!!");
 										saque.setValor(EntradaSaida.solicitarInformacoesSaque());
 									}
-									listaDeMoviemntacao.add(saque);
+									listaDeMovimentacao.add(saque);
+									listaDeSaques.add(saque);
 									poupanca.setTransferConta(saque.getValor());
 									listaPoupanca.add(poupanca);
 									this.conta.sacar( saque.getValor());
@@ -150,29 +168,34 @@ public class 	Controller {
 						}
 						break;
 					case 1:
-						for (int i = 0; i < listaDeMoviemntacao.size(); i++) {
-							EntradaSaida.exibirExtratoDeDepositos(listaDeMoviemntacao, tiposDeConta, i);
+						int escolhaExtrato = EntradaSaida.solicitaOpcoesDeExtrato();
+						switch (escolhaExtrato){
+							case 0:
+								this.conta.gerarExtrato( listaDeMovimentacao, tiposDeConta, tipoDeTransacaoGeral,dataDeMovimentacao);
+								break;
+							case 1:
+								this.conta.gerarExtratoDepositos(listaDeDepositos, tiposDeConta);
+								break;
+							case 2:
+								this.conta.gerarExtratoSaques(listaDeSaques, tiposDeConta);
+								break;
+							case 3:
+								this.conta.gerarExtratoPoupanca(poupancaTipoTrans, listaPoupanca);
+								break;
+							case 4:
+								this.conta.gerarExtratoCorrente(correnteTipoTrans, listaCorrente);
+								break;
+							case 5:
+								EntradaSaida.exibirSaldo(this.conta.gerarSaldo(conta.getSaldo()));
 						}
-						System.out.println("###########################################################");
-						System.out.println("<<POUPANÇA>>");
-						for(int i = 0; i<listaPoupanca.size(); i++){
-
-							EntradaSaida.exibirExtratoPopCorr(poupancaTipoTrans, listaPoupanca,"Poupança",  i);
-
-						}
-						System.out.println("###########################################################");
-						System.out.println("<<CORRENTE>>");
-						for(int i = 0; i<listaCorrente.size(); i++){
-
-							EntradaSaida.exibirExtratoPopCorr(correnteTipoTrans, listaCorrente,"Corrente",  i);
-						}
-
-
+						break;
+					case 2:
+						EntradaSaida.exibirDadosDaConta(this.conta.gerarDadosDaConta(usuario.getNome(), usuario.getEndereco(), usuario.getCpf()));
 						break;
 				}
-			} while (escolha != 2);
+			} while (escolha != 3);
 			EntradaSaida.msgEncerraPrograma();
-			System.out.println(this.conta.getSaldo());
+
 			System.exit(0);
 		}else{
 			EntradaSaida.msgEncerraPrograma();

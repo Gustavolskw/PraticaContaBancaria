@@ -1,11 +1,6 @@
 package View;
 
-import Model.Cofre;
-import Model.Conta;
-import Model.Movimentacao;
-
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class EntradaSaida {
 	 public static int solicitarInformacoesDeposito(){
@@ -15,32 +10,32 @@ public class EntradaSaida {
 		  return Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o valor a ser Sacado", "<<Saque>>", JOptionPane.PLAIN_MESSAGE ));
 	 }
 	 public static void exibirSaldo(int saldoAtual){
-		  JOptionPane.showMessageDialog(null, "Saldo Atual é de: "+ saldoAtual, "Banco da Somália", JOptionPane.INFORMATION_MESSAGE);
+		  JOptionPane.showMessageDialog(null, "Saldo Total é de: "+ saldoAtual, "Banco da Somália", JOptionPane.INFORMATION_MESSAGE);
 	 }
-	 public static void exibirDadosDaConta() {
-		  //exibir nome do titular, tipo e saldo
+	 public static void exibirDadosDaConta(String dados) {
+		  JOptionPane.showMessageDialog(null, dados, "Dados da Conta", JOptionPane.INFORMATION_MESSAGE);
 		  
 	 }
-	 public static void exibirExtratoCompleto(){
-		
+	 public static void exibirExtratoCompleto(StringBuilder extrato){
+		 JOptionPane.showMessageDialog(null,"<<<Extrato Completo>>>\n"+extrato);
 	 }
-	 public static void exibirExtratoDeDepositos(ArrayList<Movimentacao> lista, ArrayList<Conta> tipoDeConta, int valor ) {
-		 System.out.println("Movimentação " + (valor + 1)+  " - " + tipoDeConta.get(valor).getTipo()+ " : " +lista.get(valor).getValor());
+	 public static void exibirExtratoDeDepositos(StringBuilder depositos) {
+		 JOptionPane.showMessageDialog(null,"<<<Extrato de Depositos>>> \n"+depositos);
 	 }
-	 public static void exibirExtratoDeSaques(String tipoDeConta, int valor ) {
-		 System.out.println("Saque - "+tipoDeConta+ valor);
+	 public static void exibirExtratoDeSaques(StringBuilder saques) {
+		 JOptionPane.showMessageDialog(null,"<<<Extrato de Saques>>> \n"+saques);
 	 }
 	 public static String solicitaOpcaoDeMovimentacao(){
-		  String[] opcoes= {"Depositar", "Sacar"};
+		  String[] opcoes= {"Deposito", "Saque"};
 		  int escolha  =  JOptionPane.showOptionDialog(null, "Selecione entre as movimentaçoes Disponiveis", "Banco da Somalia", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 		  if(escolha== 0 ){
-			   return "Depositar";
+			   return "Deposito";
 		  }else {
-			   return "Sacar";
+			   return "Saque";
 		  }
 	 }
 	 public static int escolha(){
-		  String[] opcoes = {"Opcoes de Movimentação", "Detalhes do Extrato", "Sair"};
+		  String[] opcoes = {"Opcoes de Movimentação", "Detalhes do Extrato", "Detalhes da Conta", "Sair"};
 		  JComboBox<String> menu = new JComboBox<>(opcoes);
 		  JOptionPane.showConfirmDialog(null, menu, "Selecione a opcao que deseja executar.", JOptionPane.DEFAULT_OPTION);
 		  return menu.getSelectedIndex();
@@ -77,8 +72,17 @@ public class EntradaSaida {
 	 public static void mensagemGeral(String mensagem){
 		  JOptionPane.showMessageDialog(null, mensagem, "Banco da Somália", JOptionPane.INFORMATION_MESSAGE);
 	 }
-	public static void exibirExtratoPopCorr(ArrayList<Movimentacao>tipoDeTransacao, ArrayList<Cofre> lista,String tipoDeConta,  int valor ) {
-		System.out.println(tipoDeTransacao.get(valor).getTipo() +  " -  "+tipoDeConta +  " : " +lista.get(valor).getTransferConta());
+	public static void exibirExtratoPopCorr(StringBuilder extratoPopCorr) {
+		JOptionPane.showMessageDialog(null, "<<<Extrato de Conta>>> \n"+ extratoPopCorr);
 	}
-	 
+
+	public static int solicitaOpcoesDeExtrato() {
+		 String []opcoes = {"Completo", "Depositos", "Saques", "Conta Poupança", "Conta Corrente", "Saldo"};
+		JComboBox<String> menu = new JComboBox<>(opcoes);
+		JOptionPane.showConfirmDialog(null, menu, "Selecione a opçao de vizualizaçao de extrato", JOptionPane.DEFAULT_OPTION);
+		return menu.getSelectedIndex();
+	}
+	public static String solicitaData(){
+		 return JOptionPane.showInputDialog(null, "Digite a data da Transaçao");
+	}
 }
